@@ -1,0 +1,4 @@
+{
+    "bgg-login": "kesipyc",
+    "bgg-password": "password"
+}
