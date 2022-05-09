@@ -1,1 +1,3 @@
 py-bgg
+gspread
+gspread-formatting

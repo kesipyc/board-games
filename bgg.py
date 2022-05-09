@@ -1,9 +1,6 @@
-from libbgg.apiv1 import BGG
-from libbgg.apiv2 import BGG as BGG2
-
 import urllib.request
 
-from stub import Stub
+from libbgg.apiv2 import BGG as BGG2
 
 
 class BGG2WithAuth(BGG2):
@@ -30,15 +27,26 @@ def convert_game(game):
         name = game.name.value
 
     yearpublished = int(game.yearpublished.value)
+    playingtime = int(game.playingtime.value)
+
     minplayers = int(game.minplayers.value)
     maxplayers = int(game.maxplayers.value)
-    playingtime = int(game.playingtime.value)
     suggested_numplayers = next(item.results for item in game.poll if item.name == 'suggested_numplayers')
+
     averageweight = float(game.statistics.ratings.averageweight.value)
+
+    usersrated = int(game.statistics.ratings.usersrated.value)
+    average = float(game.statistics.ratings.average.value)
+    bayesaverage = float(game.statistics.ratings.bayesaverage.value)
 
     return {
         'name': name,
         'yearpublished': yearpublished,
+
+        'usersrated': usersrated,
+        'average': average,
+        'bayesaverage': bayesaverage,
+
         'minplayers': minplayers,
         'maxplayers': maxplayers,
         'suggested_numplayers': suggested_numplayers,
@@ -58,10 +66,10 @@ class BoardGameGeek:
         self.bgg2 = BGG2WithAuth(login, password)
 
     def get_games(self, games_ids):
-        # games = self.bgg2.boardgame(games_ids, stats=True, ratingcomments=False)
-        # return map(convert_game, games['items']['item'])
-        return Stub.get_games()
+        games = self.bgg2.boardgame(games_ids, stats=True, ratingcomments=False)
+        return map(convert_game, games['items']['item'])
+        # return Stub.get_games()
 
     def get_my_collection(self):
-        # return self.bgg2.get_collection(self.login, excludesubtype="boardgameexpansion", showprivate=1, own=1)
-        return Stub.get_my_collection()
+        return self.bgg2.get_collection(self.login, excludesubtype="boardgameexpansion", showprivate=1, own=1)
+        # return Stub.get_my_collection()

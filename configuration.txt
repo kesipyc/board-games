@@ -1,4 +1,8 @@
 {
     "bgg-login": "kesipyc",
-    "bgg-password": "password"
+    "bgg-password": "password",
+    "spreadsheet": "https://docs.google.com/spreadsheets/d/1hUAk0UGZZWCXFHJPdjmILHNI8UnDdOCfdwKneyi0Pmo",
+    "spreadsheet-credentials": {
+
+                       }
 }
